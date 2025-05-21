@@ -1,6 +1,6 @@
 <?php
 // Root url for the site
-define('ROOT_URL', 'http://localhost/inventory/');
+define('ROOT_URL', 'https://inventory.stanvic.com.ng/');
 
 
 // Database parameters
