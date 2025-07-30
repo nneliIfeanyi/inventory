@@ -115,12 +115,29 @@ $(document).ready(function () {
 
 	// Listen to customer add button
 	$('#addCustomer').on('click', function () {
-		addCustomer();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			addCustomer();
+		}, 1500);
+
 	});
 
 	// Listen to vendor add button
 	$('#addVendor').on('click', function () {
-		addVendor();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			addVendor();
+		}, 1500);
 	});
 
 	// Listen to item add button
@@ -138,7 +155,15 @@ $(document).ready(function () {
 
 	// Listen to purchase add button
 	$('#addPurchase').on('click', function () {
-		addPurchase();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			addPurchase();
+		}, 1500);
 	});
 
 	// Listen to sale add button
@@ -156,27 +181,67 @@ $(document).ready(function () {
 
 	// Listen to update button in item details tab
 	$('#updateItemDetailsButton').on('click', function () {
-		updateItem();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			updateItem();
+		}, 1500);
 	});
 
 	// Listen to update button in customer details tab
 	$('#updateCustomerDetailsButton').on('click', function () {
-		updateCustomer();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			updateCustomer();
+		}, 1500);
 	});
 
 	// Listen to update button in vendor details tab
 	$('#updateVendorDetailsButton').on('click', function () {
-		updateVendor();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			updateVendor();
+		}, 1500);
 	});
 
 	// Listen to update button in purchase details tab
 	$('#updatePurchaseDetailsButton').on('click', function () {
-		updatePurchase();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			updatePurchase();
+		}, 1500);
 	});
 
 	// Listen to update button in sale details tab
 	$('#updateSaleDetailsButton').on('click', function () {
-		updateSale();
+
+		Swal.fire({
+			title: 'Submitting...',
+			allowOutsideClick: false,
+			didOpen: () => Swal.showLoading()
+		});
+		setTimeout(() => {
+			updateSale();
+		}, 1500);
 	});
 
 	// Listen to delete button in item details tab
@@ -933,8 +998,9 @@ function addCustomer() {
 			customerDetailsStatus: customerDetailsStatus,
 		},
 		success: function (data) {
-			$('#customerDetailsMessage').fadeIn();
-			$('#customerDetailsMessage').html(data);
+			// $('#customerDetailsMessage').fadeIn();
+			// $('#customerDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function (data) {
 			populateLastInsertedID(customerLastInsertedIDFile, 'customerDetailsCustomerID');
@@ -972,8 +1038,9 @@ function addVendor() {
 			vendorDetailsStatus: vendorDetailsStatus,
 		},
 		success: function (data) {
-			$('#vendorDetailsMessage').fadeIn();
-			$('#vendorDetailsMessage').html(data);
+			// $('#vendorDetailsMessage').fadeIn();
+			// $('#vendorDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function (data) {
 			populateLastInsertedID(vendorLastInsertedIDFile, 'vendorDetailsVendorID');
@@ -1010,7 +1077,7 @@ function addItem() {
 		success: function (data) {
 			// $('#itemDetailsMessage').fadeIn();
 			// $('#itemDetailsMessage').html(data);
-			Swal.fire('Success!', data, 'success');
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			populateLastInsertedID(itemLastInsertedIDFile, 'itemDetailsProductID');
@@ -1043,8 +1110,9 @@ function addPurchase() {
 			purchaseDetailsVendorName: purchaseDetailsVendorName,
 		},
 		success: function (data) {
-			$('#purchaseDetailsMessage').fadeIn();
-			$('#purchaseDetailsMessage').html(data);
+			// $('#purchaseDetailsMessage').fadeIn();
+			// $('#purchaseDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			getItemStockToPopulate('purchaseDetailsItemNumber', getItemStockFile, 'purchaseDetailsCurrentStock');
@@ -1085,7 +1153,7 @@ function addSale() {
 		success: function (data) {
 			// $('#saleDetailsMessage').fadeIn();
 			// $('#saleDetailsMessage').html(data);
-			Swal.fire('Success!', data, 'success');
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			getItemStockToPopulate('saleDetailsItemNumber', getItemStockFile, 'saleDetailsTotalStock');
@@ -1266,8 +1334,9 @@ function deleteItem() {
 			method: 'POST',
 			data: { itemDetailsItemNumber: itemDetailsItemNumber },
 			success: function (data) {
-				$('#itemDetailsMessage').fadeIn();
-				$('#itemDetailsMessage').html(data);
+				// $('#itemDetailsMessage').fadeIn();
+				// $('#itemDetailsMessage').html(data);
+				Swal.fire('', data, 'info');
 			},
 			complete: function () {
 				searchTableCreator('itemDetailsTableDiv', itemDetailsSearchTableCreatorFile, 'itemDetailsTable');
@@ -1291,8 +1360,9 @@ function deleteCustomer() {
 			method: 'POST',
 			data: { customerDetailsCustomerID: customerDetailsCustomerID },
 			success: function (data) {
-				$('#customerDetailsMessage').fadeIn();
-				$('#customerDetailsMessage').html(data);
+				// $('#customerDetailsMessage').fadeIn();
+				// $('#customerDetailsMessage').html(data);
+				Swal.fire('', data, 'info');
 			},
 			complete: function () {
 				searchTableCreator('customerDetailsTableDiv', customerDetailsSearchTableCreatorFile, 'customerDetailsTable');
@@ -1316,8 +1386,9 @@ function deleteVendor() {
 			method: 'POST',
 			data: { vendorDetailsVendorID: vendorDetailsVendorID },
 			success: function (data) {
-				$('#vendorDetailsMessage').fadeIn();
-				$('#vendorDetailsMessage').html(data);
+				// $('#vendorDetailsMessage').fadeIn();
+				// $('#vendorDetailsMessage').html(data);
+				Swal.fire('', data, 'info');
 			},
 			complete: function () {
 				searchTableCreator('vendorDetailsTableDiv', vendorDetailsSearchTableCreatorFile, 'vendorDetailsTable');
@@ -1493,8 +1564,9 @@ function updateItem() {
 		},
 		success: function (data) {
 			var result = $.parseJSON(data);
-			$('#itemDetailsMessage').fadeIn();
-			$('#itemDetailsMessage').html(result.alertMessage);
+			// $('#itemDetailsMessage').fadeIn();
+			// $('#itemDetailsMessage').html(result.alertMessage);
+			Swal.fire('', result.alertMessage, 'info');
 			if (result.newStock != null) {
 				$('#itemDetailsTotalStock').val(result.newStock);
 			}
@@ -1540,8 +1612,9 @@ function updateCustomer() {
 			customerDetailsStatus: customerDetailsStatus,
 		},
 		success: function (data) {
-			$('#customerDetailsMessage').fadeIn();
-			$('#customerDetailsMessage').html(data);
+			// $('#customerDetailsMessage').fadeIn();
+			// $('#customerDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			searchTableCreator('customerDetailsTableDiv', customerDetailsSearchTableCreatorFile, 'customerDetailsTable');
@@ -1582,8 +1655,9 @@ function updateVendor() {
 			vendorDetailsStatus: vendorDetailsStatus,
 		},
 		success: function (data) {
-			$('#vendorDetailsMessage').fadeIn();
-			$('#vendorDetailsMessage').html(data);
+			// $('#vendorDetailsMessage').fadeIn();
+			// $('#vendorDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			searchTableCreator('purchaseDetailsTableDiv', purchaseDetailsSearchTableCreatorFile, 'purchaseDetailsTable');
@@ -1618,8 +1692,9 @@ function updatePurchase() {
 			purchaseDetailsVendorName: purchaseDetailsVendorName,
 		},
 		success: function (data) {
-			$('#purchaseDetailsMessage').fadeIn();
-			$('#purchaseDetailsMessage').html(data);
+			// $('#purchaseDetailsMessage').fadeIn();
+			// $('#purchaseDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			getItemStockToPopulate('purchaseDetailsItemNumber', getItemStockFile, 'purchaseDetailsCurrentStock');
@@ -1659,8 +1734,9 @@ function updateSale() {
 			saleDetailsCustomerID: saleDetailsCustomerID,
 		},
 		success: function (data) {
-			$('#saleDetailsMessage').fadeIn();
-			$('#saleDetailsMessage').html(data);
+			// $('#saleDetailsMessage').fadeIn();
+			// $('#saleDetailsMessage').html(data);
+			Swal.fire('', data, 'info');
 		},
 		complete: function () {
 			getItemStockToPopulate('saleDetailsItemNumber', getItemStockFile, 'saleDetailsTotalStock');
