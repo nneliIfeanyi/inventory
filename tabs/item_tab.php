@@ -16,7 +16,7 @@
                 <div id="itemDetailsTab" class="container-fluid tab-pane active">
                     <br>
                     <!-- Div to show the ajax message from validations/db submission -->
-                    <div id="itemDetailsMessage"></div>
+                    <div id="itemDetailsMessage"></div><!-- Upgraded now to swal.fire -->
                     <form>
                         <div class="form-row">
                             <div class="form-group col-md-3" style="display:inline-block">
@@ -42,12 +42,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <input type="hidden" name="itemDetailsDescription" value="" id="itemDetailsDescription">
+                        <!-- <div class="form-row">
                             <div class="form-group col-md-6" style="display:inline-block">
-                                <!-- <label for="itemDetailsDescription">Description</label> -->
-                                <textarea rows="4" class="form-control" placeholder="Description" name="itemDetailsDescription" id="itemDetailsDescription"></textarea>
+                                <label for="itemDetailsDescription">Description</label>
+                               <textarea rows="4" class="form-control" placeholder="Description" name="itemDetailsDescription" id="itemDetailsDescription"></textarea>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="itemDetailsDiscount">Discount %</label>
@@ -65,9 +66,9 @@
                                 <label for="itemDetailsTotalStock">Total Stock</label>
                                 <input type="text" class="form-control" name="itemDetailsTotalStock" id="itemDetailsTotalStock" readonly>
                             </div>
-                            <div class="form-group col-md-3">
+                            <!-- <div class="form-group col-md-3">
                                 <div id="imageContainer"></div>
-                            </div>
+                            </div> -->
                         </div>
                         <button type="button" id="addItem" class="btn btn-success">Add Item</button>
                         <button type="button" id="updateItemDetailsButton" class="btn btn-primary">Update</button>
