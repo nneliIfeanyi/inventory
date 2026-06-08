@@ -1,23 +1,23 @@
 <?php
 // Root url for the site
-// define('ROOT_URL', 'https://inventory.stanvic.com.ng/');
+define('ROOT_URL', 'https://inventory.revivallabourers.org.ng/');
 
 
-// // Database parameters
-// // Data source name
-// define('DSN', 'mysql:host=localhost;dbname=stanvicc_shop_inventory');
+// Database parameters
+// Data source name
+define('DSN', 'mysql:host=localhost;dbname=revivall_inventory');
 
-// // Hostname
-// define('DB_HOST', 'localhost');
+// Hostname
+define('DB_HOST', 'localhost');
 
-// // DB user
-// define('DB_USER', 'stanvicc_inventory');
+// DB user
+define('DB_USER', 'revivall_inventory');
 
-// // DB password
-// define('DB_PASSWORD', 'Avalanche@2025');
+// DB password
+define('DB_PASSWORD', 'Avalanche@2025');
 
-// // DB name
-// define('DB_NAME', 'stanvicc_shop_inventory');
+// DB name
+define('DB_NAME', 'revivall_inventory');
 ?>
 
 
@@ -25,23 +25,23 @@
 <?php
 
 // Root url for the site
-define('ROOT_URL', 'http://localhost/leadventory/');
+// define('ROOT_URL', 'http://localhost/inventory/');
 
 
-// Database parameters
-// Data source name
-define('DSN', 'mysql:host=localhost;dbname=shop_inventory');
+// // Database parameters
+// // Data source name
+// define('DSN', 'mysql:host=localhost;dbname=shop_inventory');
 
-// Hostname
-define('DB_HOST', 'localhost');
+// // Hostname
+// define('DB_HOST', 'localhost');
 
-// DB user
-define('DB_USER', 'root');
+// // DB user
+// define('DB_USER', 'root');
 
-// DB password
-define('DB_PASSWORD', '');
+// // DB password
+// define('DB_PASSWORD', '');
 
-// DB name
-define('DB_NAME', 'shop_inventory');
+// // DB name
+// define('DB_NAME', 'shop_inventory');
 
 ?>

@@ -5,7 +5,9 @@ require_once('../../inc/config/db.php');
 $initialStock = 0;
 $baseImageFolder = '../../data/item_images/';
 $itemImageFolder = '';
-
+$today = date('Y-m-d');
+$vendorID = 1; // Default vendor ID for new items. This is required as purchase table has a foreign key constraint with vendor table. Hence, we need to insert a default value here. You can change this as per your requirement.
+$vendorName = '';
 if (isset($_POST['itemDetailsItemNumber'])) {
 
 	$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
@@ -73,6 +75,12 @@ if (isset($_POST['itemDetailsItemNumber'])) {
 			$insertItemSql = 'INSERT INTO item(itemNumber, itemName, discount, stock, unitPrice, status, description) VALUES(:itemNumber, :itemName, :discount, :stock, :unitPrice, :status, :description)';
 			$insertItemStatement = $conn->prepare($insertItemSql);
 			$insertItemStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'discount' => $discount, 'stock' => $quantity, 'unitPrice' => $unitPrice, 'status' => $status, 'description' => $description]);
+			// Also insert to purchase table
+			$insertPurchaseSql = 'INSERT INTO purchase(itemNumber, purchaseDate, itemName, unitPrice, quantity, vendorName, vendorID) VALUES(:itemNumber, :purchaseDate, :itemName, :unitPrice, :quantity, :vendorName, :vendorID)';
+			$insertPurchaseStatement = $conn->prepare($insertPurchaseSql);
+			$insertPurchaseStatement->execute(['itemNumber' => $itemNumber, 'purchaseDate' => $today, 'itemName' => $itemName, 'unitPrice' => $unitPrice, 'quantity' => $quantity, 'vendorName' => $vendorName, 'vendorID' => $vendorID]);
+
+
 			echo '<div class="alert alert-success">Item added to database.</div>';
 			exit();
 		}

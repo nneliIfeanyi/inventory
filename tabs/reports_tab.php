@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="v-pills-reports" role="tabpanel" aria-labelledby="v-pills-reports-tab">
     <div class="card card-outline-secondary my-4">
-        <div class="card-header">Reports<button id="reportsTablesRefresh" name="reportsTablesRefresh" class="btn btn-warning float-right btn-sm">Refresh</button></div>
+        <div class="card-header"><b>Reports</b><button id="reportsTablesRefresh" name="reportsTablesRefresh" class="btn btn-warning float-right btn-sm">Refresh</button></div>
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
@@ -24,7 +24,7 @@
             <div class="tab-content">
                 <div id="itemReportsTab" class="container-fluid tab-pane active">
                     <br>
-                    <p>Use the grid below to get reports for items</p>
+                    <!-- <p>Use the grid below to get reports for items</p> -->
                     <div class="table-responsive" id="itemReportsTableDiv"></div>
                 </div>
                 <!-- <div id="customerReportsTab" class="container-fluid tab-pane fade">
@@ -39,11 +39,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="saleReportStartDate">Start Date</label>
-                                <input type="text" class="form-control datepicker" id="saleReportStartDate" value="2018-05-24" name="saleReportStartDate" readonly>
+                                <input type="text" class="form-control datepicker" id="saleReportStartDate" value="<?php echo date('Y-m-d'); ?>" name="saleReportStartDate" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="saleReportEndDate">End Date</label>
-                                <input type="text" class="form-control datepicker" id="saleReportEndDate" value="2018-05-24" name="saleReportEndDate" readonly>
+                                <input type="text" class="form-control datepicker" id="saleReportEndDate" value="<?php echo date('Y-m-d'); ?>" name="saleReportEndDate" readonly>
                             </div>
                         </div>
                         <button type="button" id="showSaleReport" class="btn btn-dark">Show Report</button>
@@ -59,11 +59,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="purchaseReportStartDate">Start Date</label>
-                                <input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="2018-05-24" name="purchaseReportStartDate" readonly>
+                                <input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="<?php echo date('Y-m-d'); ?>" name="purchaseReportStartDate" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="purchaseReportEndDate">End Date</label>
-                                <input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="2018-05-24" name="purchaseReportEndDate" readonly>
+                                <input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="<?php echo date('Y-m-d'); ?>" name="purchaseReportEndDate" readonly>
                             </div>
                         </div>
                         <button type="button" id="showPurchaseReport" class="btn btn-dark">Show Report</button>

@@ -584,9 +584,73 @@ function reportsTableCreator(tableContainerDiv, tableCreatorFileUrl, table) {
 			buttons: [
 				'copy',
 				'csv', 'excel',
-				{ extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
-				'print'
-			]
+				{ extend: 'pdf', footer: true, orientation: 'portrait', pageSize: 'LEGAL', title: 'Closing Stock' },
+				{ extend: 'print', footer: true, title: 'Closing Stock' },
+			],
+			"footerCallback": function (row, data, start, end, display) {
+				var api = this.api(), data;
+
+				// Remove the formatting to get integer data for summation
+				var intVal = function (i) {
+					return typeof i === 'string' ?
+						i.replace(/[\$,]/g, '') * 1 :
+						typeof i === 'number' ?
+							i : 0;
+				};
+
+				// Quantity total over all pages
+				quantityTotal = api
+					.column(4)
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Quantity for current page
+				quantityFilteredTotal = api
+					.column(4, { page: 'current' })
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Unit price total over all pages
+				unitPriceTotal = api
+					.column(5)
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Unit price for current page
+				unitPriceFilteredTotal = api
+					.column(5, { page: 'current' })
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Full price total over all pages
+				fullPriceTotal = api
+					.column(6)
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Full price for current page
+				fullPriceFilteredTotal = api
+					.column(6, { page: 'current' })
+					.data()
+					.reduce(function (a, b) {
+						return intVal(a) + intVal(b);
+					}, 0);
+
+				// Update footer columns
+				$(api.column(4).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
+				$(api.column(5).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
+				$(api.column(6).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
+			}
 		});
 	});
 }
@@ -620,7 +684,7 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Quantity total over all pages
 				quantityTotal = api
-					.column(6)
+					.column(4)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -628,7 +692,7 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Quantity for current page
 				quantityFilteredTotal = api
-					.column(6, { page: 'current' })
+					.column(4, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -636,7 +700,7 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Unit price total over all pages
 				unitPriceTotal = api
-					.column(7)
+					.column(5)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -644,7 +708,7 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Unit price for current page
 				unitPriceFilteredTotal = api
-					.column(7, { page: 'current' })
+					.column(5, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -652,7 +716,7 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Full price total over all pages
 				fullPriceTotal = api
-					.column(8)
+					.column(6)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -660,16 +724,16 @@ function reportsPurchaseTableCreator(tableContainerDiv, tableCreatorFileUrl, tab
 
 				// Full price for current page
 				fullPriceFilteredTotal = api
-					.column(8, { page: 'current' })
+					.column(6, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
 					}, 0);
 
 				// Update footer columns
-				$(api.column(6).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
-				$(api.column(7).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
-				$(api.column(8).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
+				$(api.column(4).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
+				$(api.column(5).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
+				$(api.column(6).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
 			}
 		});
 	});
@@ -704,7 +768,7 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Quantity Total over all pages
 				quantityTotal = api
-					.column(7)
+					.column(5)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -712,7 +776,7 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Quantity Total over this page
 				quantityFilteredTotal = api
-					.column(7, { page: 'current' })
+					.column(5, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -720,7 +784,7 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Unit price Total over all pages
 				unitPriceTotal = api
-					.column(8)
+					.column(6)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -728,7 +792,7 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Unit price total over current page
 				unitPriceFilteredTotal = api
-					.column(8, { page: 'current' })
+					.column(6, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -736,7 +800,7 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Full price Total over all pages
 				fullPriceTotal = api
-					.column(9)
+					.column(7)
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
@@ -744,16 +808,16 @@ function reportsSaleTableCreator(tableContainerDiv, tableCreatorFileUrl, table) 
 
 				// Full price total over current page
 				fullPriceFilteredTotal = api
-					.column(9, { page: 'current' })
+					.column(7, { page: 'current' })
 					.data()
 					.reduce(function (a, b) {
 						return intVal(a) + intVal(b);
 					}, 0);
 
 				// Update footer columns
-				$(api.column(7).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
-				$(api.column(8).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
-				$(api.column(9).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
+				$(api.column(5).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
+				$(api.column(6).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
+				$(api.column(7).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
 			}
 		});
 	});
@@ -897,7 +961,7 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Quantity total over all pages
 					quantityTotal = api
-						.column(6)
+						.column(4)
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
@@ -905,7 +969,7 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Quantity for current page
 					quantityFilteredTotal = api
-						.column(6, { page: 'current' })
+						.column(4, { page: 'current' })
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
@@ -913,7 +977,7 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Unit price total over all pages
 					unitPriceTotal = api
-						.column(7)
+						.column(5)
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
@@ -921,7 +985,7 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Unit price for current page
 					unitPriceFilteredTotal = api
-						.column(7, { page: 'current' })
+						.column(5, { page: 'current' })
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
@@ -929,7 +993,7 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Full price total over all pages
 					fullPriceTotal = api
-						.column(8)
+						.column(6)
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
@@ -937,16 +1001,16 @@ function filteredPurchaseReportTableCreator(startDate, endDate, scriptPath, tabl
 
 					// Full price for current page
 					fullPriceFilteredTotal = api
-						.column(8, { page: 'current' })
+						.column(6, { page: 'current' })
 						.data()
 						.reduce(function (a, b) {
 							return intVal(a) + intVal(b);
 						}, 0);
 
 					// Update footer columns
-					$(api.column(6).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
-					$(api.column(7).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
-					$(api.column(8).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
+					$(api.column(4).footer()).html(quantityFilteredTotal + ' (' + quantityTotal + ' total)');
+					$(api.column(5).footer()).html(unitPriceFilteredTotal + ' (' + unitPriceTotal + ' total)');
+					$(api.column(6).footer()).html(fullPriceFilteredTotal + ' (' + fullPriceTotal + ' total)');
 				}
 			});
 		}
