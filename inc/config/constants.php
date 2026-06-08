@@ -14,7 +14,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'revivall_inventory');
 
 // DB password
-define('DB_PASSWORD', 'Avalanche@2025');
+define('DB_PASSWORD', 'Avalanche@25');
 
 // DB name
 define('DB_NAME', 'revivall_inventory');
