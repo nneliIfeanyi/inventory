@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase-tab">
     <div class="card card-outline-secondary my-4">
-        <div class="card-header">Purchase Details</div>
+        <div class="card-header"><b>Purchase Details</b></div>
         <div class="card-body">
             <div id="purchaseDetailsMessage"></div>
             <form>

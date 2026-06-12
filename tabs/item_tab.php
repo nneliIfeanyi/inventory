@@ -1,6 +1,6 @@
 <div class="tab-pane fade show active" id="v-pills-item" role="tabpanel" aria-labelledby="v-pills-item-tab">
     <div class="card card-outline-secondary my-4">
-        <div class="card-header">Item Details</div>
+        <div class="card-header"><b>Item Details</b></div>
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">

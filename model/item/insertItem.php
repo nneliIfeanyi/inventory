@@ -57,7 +57,7 @@ if (isset($_POST['itemDetailsItemNumber'])) {
 			// Folder already exist. Hence, do nothing
 		} else {
 			// Folder does not exist, Hence, create it
-			mkdir($itemImageFolder);
+			@mkdir($itemImageFolder, 0777, true);
 		}
 
 		// Calculate the stock values

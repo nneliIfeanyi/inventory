@@ -464,6 +464,14 @@ $(document).ready(function () {
 		calculateTotalInSaleTab();
 	});
 
+
+
+// Initialise notify table when present
+$(document).ready(function () {
+	if ($('#notifyTable').length) {
+		$('#notifyTable').DataTable();
+	}
+});
 	// Close any suggestions lists from the page when a user clicks on the page
 	$(document).on('click', function () {
 		$('.suggestionsList').fadeOut();
