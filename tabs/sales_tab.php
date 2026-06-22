@@ -10,17 +10,17 @@
 						<input type="text" class="form-control" id="saleDetailsItemNumber" name="saleDetailsItemNumber" autocomplete="off">
 						<div id="saleDetailsItemNumberSuggestionsDiv" class="customListDivWidth"></div>
 					</div>
-					<input type="hidden" class="form-control" value="1" id="saleDetailsCustomerID" name="saleDetailsCustomerID" autocomplete="off">
-					<input type="hidden" class="form-control" id="saleDetailsCustomerName" value="Generic" name="saleDetailsCustomerName" readonly>
-					<!-- <div class="form-group col-md-3">
-											<label for="saleDetailsCustomerID">Customer ID<span class="requiredIcon">*</span></label>
-											<input type="text" class="form-control" value="1" id="saleDetailsCustomerID" name="saleDetailsCustomerID" autocomplete="off">
-											<div id="saleDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
-										</div> -->
-					<!-- <div class="form-group col-md-4">
-											<label for="saleDetailsCustomerName">Customer Name</label>
-											<input type="text" class="form-control" id="saleDetailsCustomerName" value="Generic" name="saleDetailsCustomerName" readonly>
-										</div> -->
+					<!-- <input type="hidden" class="form-control" value="1" id="saleDetailsCustomerID" name="saleDetailsCustomerID" autocomplete="off">
+					<input type="hidden" class="form-control" id="saleDetailsCustomerName" value="Generic" name="saleDetailsCustomerName" readonly> -->
+					<div class="form-group col-md-3">
+						<label for="saleDetailsCustomerID">Customer ID<span class="requiredIcon">*</span></label>
+						<input type="text" class="form-control" id="saleDetailsCustomerID" name="saleDetailsCustomerID" autocomplete="off">
+						<div id="saleDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="saleDetailsCustomerName">Customer Name</label>
+						<input type="text" class="form-control" id="saleDetailsCustomerName" name="saleDetailsCustomerName" readonly>
+					</div>
 					<div class="form-group col-md-2">
 						<label for="saleDetailsSaleID">Sale ID</label>
 						<input type="text" class="form-control invTooltip" id="saleDetailsSaleID" name="saleDetailsSaleID" title="This will be auto-generated when you add a new record" autocomplete="off">

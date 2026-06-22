@@ -18,6 +18,8 @@ require_once('inc/header.html');
 
 	<div class="col-lg-10">
 		<div class="tab-content" id="v-pills-tabContent">
+			<!-- Dashboard Tab -->
+			<?php include 'tabs/dashboard_tab.php'; ?>
 			<!-- Item Tab -->
 			<?php include 'tabs/item_tab.php'; ?>
 			<!-- Purchase Tab -->

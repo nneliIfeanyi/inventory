@@ -6,18 +6,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#itemSearchTab">Item</a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#customerSearchTab">Customer</a>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#saleSearchTab">Sale</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#purchaseSearchTab">Purchase</a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#vendorSearchTab">Vendor</a>
-                </li> -->
+                </li>
             </ul>
 
             <!-- Tab panes -->
@@ -28,11 +28,11 @@
                     <!-- <a href="#" class="itemDetailsHover" data-toggle="popover" id="10">wwwee</a> -->
                     <div class="table-responsive" id="itemDetailsTableDiv"></div>
                 </div>
-                <!-- <div id="customerSearchTab" class="container-fluid tab-pane fade">
+                <div id="customerSearchTab" class="container-fluid tab-pane fade">
                     <br>
                     <p>Use the grid below to search all details of customers</p>
                     <div class="table-responsive" id="customerDetailsTableDiv"></div>
-                </div> -->
+                </div>
                 <div id="saleSearchTab" class="container-fluid tab-pane fade">
                     <br>
                     <p>Use the grid below to search sale details</p>
@@ -43,11 +43,11 @@
                     <p>Use the grid below to search purchase details</p>
                     <div class="table-responsive" id="purchaseDetailsTableDiv"></div>
                 </div>
-                <!-- <div id="vendorSearchTab" class="container-fluid tab-pane fade">
+                <div id="vendorSearchTab" class="container-fluid tab-pane fade">
                     <br>
                     <p>Use the grid below to search vendor details</p>
                     <div class="table-responsive" id="vendorDetailsTableDiv"></div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

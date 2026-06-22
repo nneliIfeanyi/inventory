@@ -27,27 +27,27 @@
                         <label for="vendorDetailsVendorMobile">Phone (mobile)<span class="requiredIcon">*</span></label>
                         <input type="text" class="form-control invTooltip" id="vendorDetailsVendorMobile" name="vendorDetailsVendorMobile" title="Do not enter leading 0">
                     </div>
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                         <label for="vendorDetailsVendorPhone2">Phone 2</label>
                         <input type="text" class="form-control invTooltip" id="vendorDetailsVendorPhone2" name="vendorDetailsVendorPhone2" title="Do not enter leading 0">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="vendorDetailsVendorEmail">Email</label>
                         <input type="email" class="form-control" id="vendorDetailsVendorEmail" name="vendorDetailsVendorEmail">
-                    </div>
+                    </div> -->
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="vendorDetailsVendorAddress">Address<span class="requiredIcon">*</span></label>
                     <input type="text" class="form-control" id="vendorDetailsVendorAddress" name="vendorDetailsVendorAddress">
-                </div>
-                <div class="form-group">
+                </div> -->
+                <!-- <div class="form-group">
                     <label for="vendorDetailsVendorAddress2">Address 2</label>
                     <input type="text" class="form-control" id="vendorDetailsVendorAddress2" name="vendorDetailsVendorAddress2">
-                </div>
+                </div> -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="vendorDetailsVendorCity">City</label>
-                        <input type="text" class="form-control" id="vendorDetailsVendorCity" name="vendorDetailsVendorCity">
+                        <label for="vendorDetailsVendorAddress">Address</label>
+                        <input type="text" class="form-control" id="vendorDetailsVendorAddress" name="vendorDetailsVendorAddress">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="vendorDetailsVendorDistrict">District</label>
