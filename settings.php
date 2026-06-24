@@ -66,52 +66,60 @@ require_once('inc/header.html');
     <?php
     require 'inc/navigation.php';
     ?>
+    <!-- Page Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- <h3 class="my-4">Hi!</h3> -->
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" href="index.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="card card-outline-secondary my-4">
+                        <div class="card-header"><b>Site Settings</b></div>
+                        <div class="card-body">
+                            <?php if ($saveError): ?>
+                                <div class="alert alert-danger"><?php echo htmlspecialchars($saveError); ?></div>
+                            <?php elseif ($saveSuccess): ?>
+                                <div class="alert alert-success"><?php echo htmlspecialchars($saveSuccess); ?></div>
+                            <?php endif; ?>
+                            <form method="POST">
+                                <div class="form-group">
+                                    <!-- Site Name Setting -->
+                                    <label for="siteName">Site Name</label>
+                                    <input type="text" class="form-control" id="siteName" name="siteName" aria-describedby="siteNameHelp" value="<?php echo htmlspecialchars($siteName); ?>" placeholder="Enter setting value">
+                                    <small id="siteNameHelp" class="form-text text-muted">Change the name of your site.</small>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Low Stock Threshold Setting -->
+                                    <label for="lowStockThreshold">Low Stock Threshold</label>
+                                    <input type="number" class="form-control" id="lowStockThreshold" name="lowStockThreshold" value="<?php echo htmlspecialchars($lowStockThreshold); ?>" aria-describedby="lowStockThresholdHelp" placeholder="Enter setting value">
+                                    <small id="lowStockThresholdHelp" class="form-text text-muted">Set the threshold for low stock notifications.</small>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Save Settings</button>
+                                <!-- Back to Dashboard Button -->
+                                <a href="index.php" class="btn btn-primary ml-2">Back to Dashboard</a>
+                            </form>
+                            <!-- Crucial Info -->
+                            <div class="alert alert-info mt-4" role="alert">
+                                <h4 class="alert-heading">Crucial Info</h4>
+                                <p>
+                                    <small class="form-text text-muted">
+                                        For Password Reset, kindly logout and use the "Reset Password" link.
+                                        <br><a href="login.php?action=resetPassword">Reset Password</a>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
 
-    <div class="col-lg-10">
-        <div class="tab-content" id="v-pills-tabContent">
-            <div class="card card-outline-secondary my-4">
-                <div class="card-header"><b>Site Settings</b></div>
-                <div class="card-body">
-                    <?php if ($saveError): ?>
-                        <div class="alert alert-danger"><?php echo htmlspecialchars($saveError); ?></div>
-                    <?php elseif ($saveSuccess): ?>
-                        <div class="alert alert-success"><?php echo htmlspecialchars($saveSuccess); ?></div>
-                    <?php endif; ?>
-                    <form method="POST">
-                        <div class="form-group">
-                            <!-- Site Name Setting -->
-                            <label for="siteName">Site Name</label>
-                            <input type="text" class="form-control" id="siteName" name="siteName" aria-describedby="siteNameHelp" value="<?php echo htmlspecialchars($siteName); ?>" placeholder="Enter setting value">
-                            <small id="siteNameHelp" class="form-text text-muted">Change the name of your site.</small>
-                        </div>
-                        <div class="form-group">
-                            <!-- Low Stock Threshold Setting -->
-                            <label for="lowStockThreshold">Low Stock Threshold</label>
-                            <input type="number" class="form-control" id="lowStockThreshold" name="lowStockThreshold" value="<?php echo htmlspecialchars($lowStockThreshold); ?>" aria-describedby="lowStockThresholdHelp" placeholder="Enter setting value">
-                            <small id="lowStockThresholdHelp" class="form-text text-muted">Set the threshold for low stock notifications.</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Settings</button>
-                        <!-- Back to Dashboard Button -->
-                        <a href="index.php" class="btn btn-secondary ml-2">Back to Dashboard</a>
-                    </form>
-                    <!-- Crucial Info -->
-                    <div class="alert alert-info mt-4" role="alert">
-                        <h4 class="alert-heading">Crucial Info</h4>
-                        <p>
-                            <small class="form-text text-muted">
-                                For Password Reset, kindly logout and use the "Reset Password" link.
-                                <br><a href="login.php?action=resetPassword">Reset Password</a>
-                            </small>
-                        </p>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </div>
-    <?php
-    require 'inc/footer.php';
-    ?>
+            <?php
+            require 'inc/footer.php';
+            ?>
 </body>
 
 </html>

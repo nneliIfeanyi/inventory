@@ -25,6 +25,8 @@
                         $smt->execute(['vendorName' => $vendorName, 'vendorID' => $vendorID]);
                         $conn->commit();
                         $resetMessage = 'Month-end reset completed. Sales and purchases have been archived.';
+                        // Refresh the page after 4 seconds to show the updated dashboard
+
                     } catch (PDOException $e) {
                         if ($conn->inTransaction()) {
                             try {

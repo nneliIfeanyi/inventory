@@ -24,6 +24,7 @@
     <script src="vendor/bootbox/bootbox.min.js"></script>
 
     <!-- Custom scripts -->
+    <script src="assets/js/app.js"></script>
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/login.js"></script>
     <script src="assets/js/sweetalert2@11.js"></script>

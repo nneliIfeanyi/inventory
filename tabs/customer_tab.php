@@ -6,23 +6,24 @@
             <div id="customerDetailsMessage"></div>
             <form>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="customerDetailsCustomerFullName">Full Name<span class="requiredIcon">*</span></label>
-                        <input type="text" class="form-control" id="customerDetailsCustomerFullName" name="customerDetailsCustomerFullName">
+                    <div class="form-group col-md-3">
+                        <label for="customerDetailsCustomerID">Customer ID</label>
+                        <input type="text" class="form-control invTooltip" id="customerDetailsCustomerID" name="customerDetailsCustomerID" title="This will be auto-generated when you add a new customer" autocomplete="off">
+                        <div id="customerDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
                     </div>
+
                     <div class="form-group col-md-2">
                         <label for="customerDetailsStatus">Status</label>
                         <select id="customerDetailsStatus" name="customerDetailsStatus" class="form-control chosenSelect">
                             <?php include('inc/statusList.html'); ?>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="customerDetailsCustomerID">Customer ID</label>
-                        <input type="text" class="form-control invTooltip" id="customerDetailsCustomerID" name="customerDetailsCustomerID" title="This will be auto-generated when you add a new customer" autocomplete="off">
-                        <div id="customerDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
-                    </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="customerDetailsCustomerFullName">Full Name<span class="requiredIcon">*</span></label>
+                        <input type="text" class="form-control" id="customerDetailsCustomerFullName" name="customerDetailsCustomerFullName">
+                    </div>
                     <div class="form-group col-md-3">
                         <label for="customerDetailsCustomerMobile">Phone (mobile)<span class="requiredIcon">*</span></label>
                         <input type="text" class="form-control invTooltip" id="customerDetailsCustomerMobile" name="customerDetailsCustomerMobile" title="Do not enter leading 0">

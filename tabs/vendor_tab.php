@@ -6,23 +6,24 @@
             <div id="vendorDetailsMessage"></div>
             <form>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="vendorDetailsVendorFullName">Full Name<span class="requiredIcon">*</span></label>
-                        <input type="text" class="form-control" id="vendorDetailsVendorFullName" name="vendorDetailsVendorFullName" placeholder="">
+                    <div class="form-group col-md-3">
+                        <label for="vendorDetailsVendorID">Vendor ID</label>
+                        <input type="text" class="form-control invTooltip" id="vendorDetailsVendorID" name="vendorDetailsVendorID" title="This will be auto-generated when you add a new vendor" autocomplete="off">
+                        <div id="vendorDetailsVendorIDSuggestionsDiv" class="customListDivWidth"></div>
                     </div>
+
                     <div class="form-group col-md-2">
                         <label for="vendorDetailsStatus">Status</label>
                         <select id="vendorDetailsStatus" name="vendorDetailsStatus" class="form-control chosenSelect">
                             <?php include('inc/statusList.html'); ?>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="vendorDetailsVendorID">Vendor ID</label>
-                        <input type="text" class="form-control invTooltip" id="vendorDetailsVendorID" name="vendorDetailsVendorID" title="This will be auto-generated when you add a new vendor" autocomplete="off">
-                        <div id="vendorDetailsVendorIDSuggestionsDiv" class="customListDivWidth"></div>
-                    </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="vendorDetailsVendorFullName">Full Name<span class="requiredIcon">*</span></label>
+                        <input type="text" class="form-control" id="vendorDetailsVendorFullName" name="vendorDetailsVendorFullName" placeholder="">
+                    </div>
                     <div class="form-group col-md-3">
                         <label for="vendorDetailsVendorMobile">Phone (mobile)<span class="requiredIcon">*</span></label>
                         <input type="text" class="form-control invTooltip" id="vendorDetailsVendorMobile" name="vendorDetailsVendorMobile" title="Do not enter leading 0">

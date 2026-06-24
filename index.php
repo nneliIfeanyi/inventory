@@ -14,6 +14,7 @@ require_once('inc/header.html');
 <body>
 	<?php
 	require 'inc/navigation.php';
+	require 'inc/sidebar.php';
 	?>
 
 	<div class="col-lg-10">
