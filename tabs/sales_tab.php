@@ -41,6 +41,15 @@
 						<label for="saleDetailsSaleDate">Sale Date<span class="requiredIcon">*</span></label>
 						<input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="<?php echo date('Y-m-d'); ?>" name="saleDetailsSaleDate" readonly>
 					</div>
+					<div class="form-group col-md-2">
+						<label for="saleDetailsCategory">Category<span class="requiredIcon">*</span></label>
+						<select name="saleDetailsCategory" id="saleDetailsCategory" class="form-control chosenSelect">
+							<option value="">-- Select Category --</option>
+							<option value="sales" selected>Sales</option>
+							<option value="damaged">Damaged</option>
+							<option value="gifting">Gifting</option>
+						</select>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-2">

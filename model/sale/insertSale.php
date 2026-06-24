@@ -12,9 +12,10 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 	$customerID = htmlentities($_POST['saleDetailsCustomerID']);
 	$customerName = htmlentities($_POST['saleDetailsCustomerName']);
 	$saleDate = htmlentities($_POST['saleDetailsSaleDate']);
+	$category = isset($_POST['saleDetailsCategory']) ? htmlentities($_POST['saleDetailsCategory']) : '';
 
 	// Check if mandatory fields are not empty
-	if (!empty($itemNumber) && isset($customerID) && isset($saleDate) && isset($quantity) && isset($unitPrice)) {
+	if (!empty($itemNumber) && !empty($customerID) && !empty($saleDate) && !empty($quantity) && !empty($unitPrice) && !empty($category)) {
 
 		// Sanitize item number
 		$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
@@ -25,6 +26,12 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 		} else {
 			// Quantity is not a valid number
 			echo '<div class="alert alert-danger">Please enter a valid number for quantity</div>';
+			exit();
+		}
+
+		// Check if category is empty
+		if ($category == '') {
+			echo '<div class="alert alert-danger">Please select a Category.</div>';
 			exit();
 		}
 
@@ -105,9 +112,9 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 					$customerName = $customerRow['fullName'];
 
 					// INSERT data to sale table
-					$insertSaleSql = 'INSERT INTO sale(itemNumber, itemName, discount, quantity, unitPrice, customerID, customerName, saleDate) VALUES(:itemNumber, :itemName, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate)';
+					$insertSaleSql = 'INSERT INTO sale(itemNumber, itemName, category, discount, quantity, unitPrice, customerID, customerName, saleDate) VALUES(:itemNumber, :itemName, :category, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate)';
 					$insertSaleStatement = $conn->prepare($insertSaleSql);
-					$insertSaleStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'discount' => $discount, 'quantity' => $quantity, 'unitPrice' => $unitPrice, 'customerID' => $customerID, 'customerName' => $customerName, 'saleDate' => $saleDate]);
+					$insertSaleStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'category' => $category, 'discount' => $discount, 'quantity' => $quantity, 'unitPrice' => $unitPrice, 'customerID' => $customerID, 'customerName' => $customerName, 'saleDate' => $saleDate]);
 
 					// UPDATE the stock in item table
 					$stockUpdateSql = 'UPDATE item SET stock = :stock WHERE itemNumber = :itemNumber';
@@ -130,8 +137,8 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 			exit();
 		}
 	} else {
-		// One or more mandatory fields are empty. Therefore, display a the error message
-		echo '<div class="alert alert-danger">Please enter all fields marked with a (*)</div>';
+		// One or more mandatory fields are empty. Therefore, display the error message
+		echo '<div class="alert alert-danger">Please enter all fields marked with a (*), including Category.</div>';
 		exit();
 	}
 }
