@@ -53,6 +53,19 @@
                 $purchasesTotalRow = $purchasesTotalQuery->fetch(PDO::FETCH_ASSOC);
                 $purchasesTotal = $purchasesTotalRow['purchasesTotal'] ?? 0;
 
+                // $conn->exec("CREATE TABLE IF NOT EXISTS credit_book (
+                //     customerID VARCHAR(50) NOT NULL,
+                //     purchaseDate DATE NOT NULL,
+                //     purchaseTotal DECIMAL(15,2) NOT NULL,
+                //     paid DECIMAL(15,2) NOT NULL
+                // )");
+
+                $creditBookQuery = $conn->query("SELECT SUM(paid) as totalPaid, SUM(purchaseTotal) as totalPurchaseTotal FROM credit_book");
+                $creditBookRow = $creditBookQuery->fetch(PDO::FETCH_ASSOC);
+                $creditBookPaid = $creditBookRow['totalPaid'] ?? 0;
+                $creditBookTotal = $creditBookRow['totalPurchaseTotal'] ?? 0;
+                $creditBookBalance = $creditBookPaid - $creditBookTotal;
+
                 // Calculate Profit with current stock value included
                 $profit = $salesTotal + $closingStock - $purchasesTotal;
                 ?>
@@ -98,12 +111,23 @@
                     </div>
                 </div>
 
+
                 <!-- Profit Card -->
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Profit</h5>
                             <p class="card-text display-6 text-info">&#8358;<?php echo number_format($profit, 2); ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Book Balance Card -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Credit Book Balance</h5>
+                            <p class="card-text display-6 <?php echo $creditBookBalance >= 0 ? 'text-success' : 'text-danger'; ?>">&#8358;<?php echo number_format($creditBookBalance, 2); ?></p>
                         </div>
                     </div>
                 </div>

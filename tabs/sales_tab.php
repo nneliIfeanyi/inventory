@@ -81,6 +81,8 @@
 				<button type="button" id="addSaleButton" class="btn btn-success">Add Sale</button>
 				<button type="button" id="updateSaleDetailsButton" class="btn btn-primary">Update</button>
 				<button type="reset" id="saleClear" class="btn">Clear</button>
+				<!-- Generate Receipt href use btn outline styling -->
+				<a href="receipt.php" id="generateReceiptButton" class="btn btn-outline-info">Generate Receipt</a>
 			</form>
 		</div>
 	</div>

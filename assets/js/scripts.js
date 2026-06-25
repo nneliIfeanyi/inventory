@@ -335,8 +335,6 @@ $(document).ready(function () {
 	// Clear the image from sale tab when Clear button is clicked
 	$('#saleClear').on('click', function () {
 		$('#saleDetailsImageContainer').empty();
-		// Re-trigger Chosen on all select fields in the sale tab
-		$('#saleDetailsCategory').trigger('chosen:updated');
 	});
 
 	// Refresh the purchase report datatable in the purchase report tab when Clear button is clicked
@@ -468,12 +466,12 @@ $(document).ready(function () {
 
 
 
-	// Initialise notify table when present
-	$(document).ready(function () {
-		if ($('#notifyTable').length) {
-			$('#notifyTable').DataTable();
-		}
-	});
+// Initialise notify table when present
+$(document).ready(function () {
+	if ($('#notifyTable').length) {
+		$('#notifyTable').DataTable();
+	}
+});
 	// Close any suggestions lists from the page when a user clicks on the page
 	$(document).on('click', function () {
 		$('.suggestionsList').fadeOut();
@@ -1210,7 +1208,6 @@ function addSale() {
 	var saleDetailsCustomerID = $('#saleDetailsCustomerID').val();
 	var saleDetailsCustomerName = $('#saleDetailsCustomerName').val();
 	var saleDetailsSaleDate = $('#saleDetailsSaleDate').val();
-	var saleDetailsCategory = document.getElementById('saleDetailsCategory').value;
 
 	$.ajax({
 		url: 'model/sale/insertSale.php',
@@ -1224,7 +1221,6 @@ function addSale() {
 			saleDetailsCustomerID: saleDetailsCustomerID,
 			saleDetailsCustomerName: saleDetailsCustomerName,
 			saleDetailsSaleDate: saleDetailsSaleDate,
-			saleDetailsCategory: saleDetailsCategory,
 		},
 		success: function (data) {
 			// $('#saleDetailsMessage').fadeIn();
@@ -1794,7 +1790,7 @@ function updateSale() {
 	var saleDetailsCustomerName = $('#saleDetailsCustomerName').val();
 	var saleDetailsDiscount = $('#saleDetailsDiscount').val();
 	var saleDetailsCustomerID = $('#saleDetailsCustomerID').val();
-	var saleDetailsCategory = document.getElementById('saleDetailsCategory').value;
+
 	$.ajax({
 		url: 'model/sale/updateSale.php',
 		method: 'POST',
@@ -1808,7 +1804,6 @@ function updateSale() {
 			saleDetailsCustomerName: saleDetailsCustomerName,
 			saleDetailsDiscount: saleDetailsDiscount,
 			saleDetailsCustomerID: saleDetailsCustomerID,
-			saleDetailsCategory: saleDetailsCategory
 		},
 		success: function (data) {
 			// $('#saleDetailsMessage').fadeIn();
