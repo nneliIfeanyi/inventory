@@ -20,7 +20,7 @@ $lowStockThreshold = DEFAULT_LOW_STOCK_THRESHOLD;
             <div class="col-lg-2">
                 <!-- <h3 class="my-4">Hi!</h3> -->
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link" href="index.php">Dashboard</a>
+                    <a class="nav-link" href="index.php">Back</a>
                 </div>
             </div>
             <div class="col-lg-10">
@@ -56,7 +56,7 @@ $lowStockThreshold = DEFAULT_LOW_STOCK_THRESHOLD;
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="index.php" class="btn btn-primary mt-2">Back to Dashboard</a>
+                            <a href="dashboard.php" class="btn btn-primary mt-2">Back to Dashboard</a>
                         </div>
                     </div>
 

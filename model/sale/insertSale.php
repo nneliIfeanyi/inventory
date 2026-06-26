@@ -15,7 +15,7 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 	$category = isset($_POST['saleDetailsCategory']) ? htmlentities($_POST['saleDetailsCategory']) : '';
 
 	// Check if mandatory fields are not empty
-	if (!empty($itemNumber) && !empty($customerID) && !empty($saleDate) && !empty($quantity) && !empty($unitPrice) && !empty($category)) {
+	if (!empty($itemNumber) && !empty($customerID) && !empty($saleDate) && !empty($quantity) && !empty($unitPrice)) {
 
 		// Sanitize item number
 		$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
@@ -26,12 +26,6 @@ if (isset($_POST['saleDetailsItemNumber'])) {
 		} else {
 			// Quantity is not a valid number
 			echo '<div class="alert alert-danger">Please enter a valid number for quantity</div>';
-			exit();
-		}
-
-		// Check if category is empty
-		if ($category == '') {
-			echo '<div class="alert alert-danger">Please select a Category.</div>';
 			exit();
 		}
 

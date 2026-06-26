@@ -72,7 +72,7 @@ require_once('inc/header.html');
             <div class="col-lg-2">
                 <!-- <h3 class="my-4">Hi!</h3> -->
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link" href="index.php">Dashboard</a>
+                    <a class="nav-link" href="index.php">Back</a>
                 </div>
             </div>
             <div class="col-lg-10">
@@ -100,7 +100,7 @@ require_once('inc/header.html');
                                 </div>
                                 <button type="submit" class="btn btn-secondary">Save Settings</button>
                                 <!-- Back to Dashboard Button -->
-                                <a href="index.php" class="btn btn-primary ml-2">Back to Dashboard</a>
+                                <a href="dashboard.php" class="btn btn-primary ml-2">Back to Dashboard</a>
                             </form>
                             <!-- Crucial Info -->
                             <div class="alert alert-info mt-4" role="alert">
