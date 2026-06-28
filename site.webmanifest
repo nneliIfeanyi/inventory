@@ -1,7 +1,7 @@
 {
-    "name": "Blessed OZ",
-    "short_name": "Blessed OZ",
-    "description": "Inventory and sales management for Blessed OZ.",
+    "name": "Leadstar",
+    "short_name": "Leadstar",
+    "description": "Inventory and sales management for Leadstar.",
     "start_url": "./",
     "scope": "./",
     "icons": [
