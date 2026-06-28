@@ -20,4 +20,4 @@ define('DB_NAME', 'revivall_inventory');
 define('DEFAULT_LOW_STOCK_THRESHOLD', 5);
 
 // Default site name
-define('DEFAULT_SITE_NAME', 'Blessed OZ');
+define('DEFAULT_SITE_NAME', 'Leadstar Inventory Management System');
