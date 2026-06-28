@@ -93,7 +93,7 @@ require_once('inc/header.html');
                     <div class="card card-outline-secondary my-4">
                         <div class="card-header">
                             <b>Dashboard</b>
-                            <button id="dashboardRefresh" class="btn btn-warning float-right btn-sm">Refresh</button>
+                            <button id="dashboardRefresh" class="btn btn-warning float-right btn-sm">View Archives</button>
                         </div>
                         <div class="card-body">
                             <script>
@@ -169,7 +169,7 @@ require_once('inc/header.html');
                                         <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center">
                                             <div>
                                                 <h5 class="card-title mb-2 mb-md-0">End-of-month reset</h5>
-                                                <p class="card-text mb-0">Click to archive current sales and purchase data into archive tables. Current stock remains unchanged and becomes next month opening stock.</p>
+                                                <p class="card-text mb-0">Click to archive current sales and purchase data into archives.<br>Current stock remains unchanged and becomes next month opening stock.<br>Credit book records will auto clear only when debt is fully paid.</p>
                                             </div>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#resetMonthModal">Reset Month Data</button>
                                         </div>
@@ -199,11 +199,96 @@ require_once('inc/header.html');
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- CREDIT BOOK DISPLAY -->
+                            <div class="card card-outline-secondary my-4">
+                                <div class="card-header"><b>Credit Book</b></div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <?php
+                                        $stmt = $conn->query("SELECT * FROM credit_book ORDER BY purchaseDate ASC");
+                                        $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        ?>
+                                        <table class="table table-bordered table-striped" id="creditBookTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Purchase Date</th>
+                                                    <th>Purchase Total</th>
+                                                    <th>Paid</th>
+                                                    <th>Balance</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i = 1;
+                                                foreach ($records as $row) {
+                                                    // Query to get customerName from customer table based on customerID in credit_book
+                                                    $customerStmt = $conn->prepare("SELECT fullName FROM customer WHERE customerID = :customerID");
+                                                    $customerStmt->execute(['customerID' => $row['customerID']]);
+                                                    $customerRow = $customerStmt->fetch(PDO::FETCH_ASSOC);
+                                                    $row['customerName'] = $customerRow ? $customerRow['fullName'] : 'Unknown'; ?>
+                                                    <tr>
+                                                        <td><?php echo $i++; ?></td>
+                                                        <td><?php echo htmlspecialchars($row['customerName']); ?></td>
+                                                        <td><?php echo htmlspecialchars($row['purchaseDate']); ?></td>
+                                                        <td><?php echo htmlspecialchars($row['purchaseTotal']); ?></td>
+                                                        <td><?php echo htmlspecialchars($row['paid']); ?></td>
+                                                        <td><?php echo htmlspecialchars($row['purchaseTotal'] - $row['paid']); ?></td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-sm btn-primary edit-credit-button" data-credit-id="<?php echo htmlspecialchars($row['id']); ?>">Edit</button>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Edit Credit Modal -->
+                                    <div class="modal fade" id="editCreditModal" tabindex="-1" role="dialog" aria-labelledby="editCreditModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editCreditModalLabel">Edit Credit Entry</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="editCreditForm">
+                                                        <input type="hidden" name="creditID" value="" />
+                                                        <div class="form-group">
+                                                            <label for="purchaseDate">Purchase Date</label>
+                                                            <input type="text" class="form-control" name="purchaseDate" readonly />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="purchaseTotal">Purchase Total</label>
+                                                            <input type="text" class="form-control" name="purchaseTotal" readonly />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="paid">Amount Paid</label>
+                                                            <input type="number" step="0.01" min="0" class="form-control" name="paid" />
+                                                        </div>
+                                                    </form>
+                                                    <p class="small text-muted">If you set Amount Paid equal to Purchase Total, the entry will be removed from the credit book.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" id="saveCreditChanges" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#top" class="btn btn-primary mt-2">Back to Top</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <?php
     require 'inc/footer.php';

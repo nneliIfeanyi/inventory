@@ -226,7 +226,7 @@ require_once('inc/header.html');
                                     </div>
 
                                     <div style="margin-bottom: 10px;">
-                                        <div>Customer ID: <?php echo htmlspecialchars($customerID); ?></div>
+                                        <!-- <div>Customer ID: <?php echo htmlspecialchars($customerID); ?></div> -->
                                         <div>Date: <?php echo htmlspecialchars($saleDate); ?></div>
                                         <div>Time: <?php echo date('H:i:s'); ?></div>
                                         <div>------------------</div>
@@ -259,7 +259,7 @@ require_once('inc/header.html');
 
                                     <div style="text-align: center; margin-top: 10px; border-top: 1px dashed #000;">
                                         <div style="margin-top: 10px; font-size: 9pt;">Thank you for your purchase!</div>
-                                        <div style="font-size: 9pt;">Please come again.</div>
+                                        <div style="font-size: 9pt;">Please call again.</div>
                                     </div>
                                 </div>
 

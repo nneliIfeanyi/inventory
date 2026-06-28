@@ -195,7 +195,7 @@ if (isset($_POST['saleDetailsSaleID'])) {
 					// Next, update the sale table
 					$updateSaleDetailsSql = 'UPDATE sale SET itemNumber = :itemNumber, category = :category, saleDate = :saleDate, itemName = :itemName, unitPrice = :unitPrice, discount = :discount, quantity = :quantity, customerName = :customerName, customerID = :customerID WHERE saleID = :saleID';
 					$updateSaleDetailsStatement = $conn->prepare($updateSaleDetailsSql);
-					$updateSaleDetailsStatement->execute(['itemNumber' => $saleDetailsItemNumber, 'saleDate' => $saleDetailsSaleDate, 'itemName' => $saleDetailsItemName, 'unitPrice' => $saleDetailsUnitPrice, 'discount' => $saleDetailsDiscount, 'quantity' => $saleDetailsQuantity, 'customerName' => $saleDetailsCustomerName, 'customerID' => $customerID, 'saleID' => $saleDetailsSaleID]);
+					$updateSaleDetailsStatement->execute(['itemNumber' => $saleDetailsItemNumber, 'category' => $saleDetailsCategory, 'saleDate' => $saleDetailsSaleDate, 'itemName' => $saleDetailsItemName, 'unitPrice' => $saleDetailsUnitPrice, 'discount' => $saleDetailsDiscount, 'quantity' => $saleDetailsQuantity, 'customerName' => $saleDetailsCustomerName, 'customerID' => $customerID, 'saleID' => $saleDetailsSaleID]);
 
 					echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Sale details updated.</div>';
 					exit();

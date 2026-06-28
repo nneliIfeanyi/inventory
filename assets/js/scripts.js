@@ -413,7 +413,7 @@ $(document).ready(function () {
 		showSuggestions('purchaseDetailsPurchaseID', showPurchaseIDSuggestionsFile, 'purchaseDetailsPurchaseIDSuggestionsDiv');
 	});
 
-	// Remove the PurchaseID suggestions dropdown in the customer details tab
+	// Remove the PurchaseID suggestions dropdown in the purchase details tab
 	// when user selects an item from it
 	$(document).on('click', '#purchaseDetailsPurchaseIDSuggestionsList li', function () {
 		$('#purchaseDetailsPurchaseID').val($(this).text());
@@ -466,15 +466,121 @@ $(document).ready(function () {
 
 
 
-// Initialise notify table when present
-$(document).ready(function () {
-	if ($('#notifyTable').length) {
-		$('#notifyTable').DataTable();
-	}
-});
+	// Initialise notify table when present
+	$(document).ready(function () {
+		if ($('#notifyTable').length) {
+			$('#notifyTable').DataTable();
+		}
+	});
+	// Initialise credit book table when present
+	// With export buttons and footer totals for Paid and Balance columns
+	$(document).ready(function () {
+		if ($('#creditBookTable').length) {
+			$('#creditBookTable').DataTable({
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				],
+				footerCallback: function () {
+					var api = this.api();
+					var footer = $(api.table().footer());
+					var paidTotal = 0;
+					var balanceTotal = 0;
+
+					api.columns([4, 5], { page: 'current' }).data().each(function (d) {
+						paidTotal += parseFloat(d[0]) || 0;
+						balanceTotal += parseFloat(d[1]) || 0;
+					});
+
+					footer.find('td:eq(4)').html(paidTotal.toFixed(2));
+					footer.find('td:eq(5)').html(balanceTotal.toFixed(2));
+				}
+			});
+		}
+	});
 	// Close any suggestions lists from the page when a user clicks on the page
 	$(document).on('click', function () {
 		$('.suggestionsList').fadeOut();
+	});
+
+	// Edit credit button handler: open modal and populate fields
+	$(document).on('click', '.edit-credit-button', function (e) {
+		e.preventDefault();
+		var btn = $(this);
+		var creditID = btn.data('credit-id');
+		var row = btn.closest('tr');
+		var tds = row.find('td');
+
+		// Table columns: #, CustomerName, PurchaseDate, PurchaseTotal, Paid, Balance, Action
+		var purchaseDate = tds.eq(2).text().trim();
+		var purchaseTotal = tds.eq(3).text().trim().replace(/[^0-9.\-]/g, '');
+		var paid = tds.eq(4).text().trim().replace(/[^0-9.\-]/g, '');
+
+		$('#editCreditModal input[name="creditID"]').val(creditID);
+		$('#editCreditModal input[name="purchaseDate"]').val(purchaseDate);
+		$('#editCreditModal input[name="purchaseTotal"]').val(purchaseTotal);
+		$('#editCreditModal input[name="paid"]').val(paid);
+
+		$('#editCreditModal').modal('show');
+	});
+
+	// Save changes from edit modal
+	$(document).on('click', '#saveCreditChanges', function (e) {
+		e.preventDefault();
+		var form = $('#editCreditForm');
+		var creditID = form.find('input[name="creditID"]').val();
+		var paidRaw = form.find('input[name="paid"]').val();
+		var paid = parseFloat(paidRaw);
+		if (isNaN(paid) || paid < 0) {
+			Swal.fire({ icon: 'error', title: 'Please enter a valid amount' });
+			return;
+		}
+
+		$.ajax({
+			url: 'model/credit/updateCredit.php',
+			method: 'POST',
+			dataType: 'json',
+			data: { creditID: creditID, paid: paid },
+			success: function (resp) {
+				if (!resp || !resp.success) {
+					var msg = resp && resp.message ? resp.message : 'Update failed';
+					Swal.fire({ icon: 'error', title: msg });
+					return;
+				}
+
+				// find the row for this creditID
+				var rowBtn = $('#creditBookTable').find('button[data-credit-id="' + creditID + '"]');
+				var row = rowBtn.closest('tr');
+
+				var isDataTable = $.fn.DataTable.isDataTable('#creditBookTable');
+				var table = isDataTable ? $('#creditBookTable').DataTable() : null;
+
+				if (resp.action === 'deleted') {
+					if (table) {
+						table.row(row).remove().draw();
+					} else {
+						row.remove();
+					}
+					Swal.fire({ icon: 'success', title: resp.message, timer: 1400, showConfirmButton: false });
+				} else if (resp.action === 'updated') {
+					// Update Paid and Balance in table cells
+					var tds = row.find('td');
+					tds.eq(4).text(parseFloat(resp.paid).toFixed(2));
+					var purchaseTotal = parseFloat(tds.eq(3).text().replace(/[^0-9.\-]/g, '')) || 0;
+					var newBalance = (purchaseTotal - parseFloat(resp.paid));
+					tds.eq(5).text(newBalance.toFixed(2));
+					if (table) {
+						table.row(row).invalidate().draw(false);
+					}
+					Swal.fire({ icon: 'success', title: resp.message, timer: 1200, showConfirmButton: false });
+				}
+
+				$('#editCreditModal').modal('hide');
+			},
+			error: function () {
+				Swal.fire({ icon: 'error', title: 'Server error' });
+			}
+		});
 	});
 
 	// Load searchable datatables for customer, purchase, item, vendor, sale
@@ -1208,6 +1314,7 @@ function addSale() {
 	var saleDetailsCustomerID = $('#saleDetailsCustomerID').val();
 	var saleDetailsCustomerName = $('#saleDetailsCustomerName').val();
 	var saleDetailsSaleDate = $('#saleDetailsSaleDate').val();
+	var saleDetailsCategory = $('#saleDetailsCategory').val();
 
 	$.ajax({
 		url: 'model/sale/insertSale.php',
@@ -1221,6 +1328,7 @@ function addSale() {
 			saleDetailsCustomerID: saleDetailsCustomerID,
 			saleDetailsCustomerName: saleDetailsCustomerName,
 			saleDetailsSaleDate: saleDetailsSaleDate,
+			saleDetailsCategory: saleDetailsCategory
 		},
 		success: function (data) {
 			// $('#saleDetailsMessage').fadeIn();
@@ -1790,6 +1898,7 @@ function updateSale() {
 	var saleDetailsCustomerName = $('#saleDetailsCustomerName').val();
 	var saleDetailsDiscount = $('#saleDetailsDiscount').val();
 	var saleDetailsCustomerID = $('#saleDetailsCustomerID').val();
+	var saleDetailsCategory = $('#saleDetailsCategory').val();
 
 	$.ajax({
 		url: 'model/sale/updateSale.php',
@@ -1804,6 +1913,7 @@ function updateSale() {
 			saleDetailsCustomerName: saleDetailsCustomerName,
 			saleDetailsDiscount: saleDetailsDiscount,
 			saleDetailsCustomerID: saleDetailsCustomerID,
+			saleDetailsCategory: saleDetailsCategory,
 		},
 		success: function (data) {
 			// $('#saleDetailsMessage').fadeIn();
